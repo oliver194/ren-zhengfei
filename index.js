@@ -34,8 +34,11 @@ client.on("messageCreate", (msg) => {
     commandFile.execute(msg, args, config);
   } catch (err) {
     if (err.code === "MODULE_NOT_FOUND") {
-      msg.reply("Invalid command!").then((msg) => {
-        setTimeout(() => msg.delete(), 5000);
+      msg.reply("Invalid command!").then((message) => {
+        setTimeout(() => {
+          msg.delete();
+          message.delete();
+        }, 5000);
       });
     }
   }
