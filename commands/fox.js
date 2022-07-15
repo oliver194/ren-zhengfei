@@ -1,8 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "cat",
-  description: "Command providing a random cat image",
+  name: "fox",
+  description: "Command providing a random fox image",
   execute(message, args, config) {
     if (message.channel.id !== config.animal_images_channel) {
       message
