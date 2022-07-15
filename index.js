@@ -7,8 +7,10 @@ async function HttpRequest(method, url) {
   return response;
 }
 
+var package_config = require("./package.json");
+
 var config = {
-  version: "1.1.5-b2",
+  version: package_config.version,
   color: "584dff",
   prefix: "!",
   animal_images_channel: process.env.ANIMAL_CHANNEL_ID,
