@@ -1,0 +1,23 @@
+{
+  "name": "ren-zhengfei-bot",
+  "version": "1.1.4",
+  "description": "Custom bot for Huaweicord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TriDiscord/ren-zhengfei-bot.git"
+  },
+  "author": "TriDiscord",
+  "contributors": ["TriDiscord", "ValerieOSS", "oliver194"],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TriDiscord/ren-zhengfei-bot/issues"
+  },
+  "homepage": "https://github.com/TriDiscord/ren-zhengfei-bot#readme",
+  "dependencies": {
+    "discord.js": "^13.8.1"
+  }
+}
