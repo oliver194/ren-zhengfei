@@ -4,6 +4,17 @@ module.exports = {
   name: "catfact",
   description: "Command providing a random cat fact",
   execute(message, args, config) {
+    if (message.channel.id !== config.animal_images_channel) {
+      message
+        .reply("This command can only be used in the animal images channel!")
+        .then((msg) => {
+          setTimeout(() => {
+            msg.delete();
+            message.delete();
+          }, 5000);
+        });
+      return;
+    }
     config.request("GET", "https://catfact.ninja/fact").then((response) => {
       response.json().then((data) => {
         const catfactEmbed = new MessageEmbed()
