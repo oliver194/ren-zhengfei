@@ -11,7 +11,7 @@ module.exports = {
           .setTitle("Here's a cat!")
           .setImage(data.file)
           .setTimestamp()
-          .setFooter({ text: `Powered by aws.random.cat • Version ${config.version}` });
+          .setFooter({ text: `Powered by aws.random.cat` });
         message.reply({ embeds: [catEmbed] });
       });
     });
