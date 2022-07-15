@@ -9,8 +9,7 @@ module.exports = {
       .setColor(config.color)
       .setTitle("About Ren Zhengfei")
       .setDescription(
-        "This bot was made by ValerieOSS, oliver193 and TriDiscord.\nSource available on GitHub"
-      )
+        "This bot was made by ValerieOSS, oliver193 and TriDiscord.\nSource available on GitHub\nhttps://github.com/oliver194/ren-zhengfei")
       .setTimestamp()
       .setFooter({ text: "Version " + config.version });
     message.reply({ embeds: [BotInfoEmbed] });
