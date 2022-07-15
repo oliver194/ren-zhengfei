@@ -6,7 +6,7 @@ module.exports = {
   execute(message, args, config) {
     if (message.channel.id !== config.animal_images_channel) {
       message
-        .reply(`This command can only be used in <#${config.animal_images_channel}>!`)
+        .reply(`This command can only be used in <#${config.animal_images_channel}>`)
         .then((msg) => {
           setTimeout(() => {
             msg.delete();
@@ -22,7 +22,7 @@ module.exports = {
           .setTitle("Here's a cat!")
           .setImage(data.file)
           .setTimestamp()
-          .setFooter({ text: `Powered by aws.random.cat` });
+          .setFooter({ text: "Powered by aws.random.cat" });
         message.reply({ embeds: [catEmbed] });
       });
     });

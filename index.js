@@ -2,14 +2,15 @@ const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 32767 });
 
 async function HttpRequest(method, url) {
+  const { default: fetch } = await import('node-fetch');
   const response = await fetch(url, { method });
   return response;
 }
 
 var config = {
-  version: "1.1.4-a1",
+  version: "1.1.5-b2",
   color: "584dff",
-  prefix: process.env.PREFIX,
+  prefix: "!",
   animal_images_channel: process.env.ANIMAL_CHANNEL_ID,
   request: HttpRequest,
 };
