@@ -8,7 +8,7 @@ async function HttpRequest(method, url) {
 }
 
 var config = {
-  version: "1.1.5-b1",
+  version: "1.1.5-b2",
   color: "584dff",
   prefix: "!",
   animal_images_channel: process.env.ANIMAL_CHANNEL_ID,
