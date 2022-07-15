@@ -4,7 +4,7 @@ module.exports = {
   execute(message, args, config) {
     config.request("GET", "https://aws.random.cat/meow").then((response) => {
       response.json().then((data) => {
-        const CatEmbed = new MessageEmbed()
+        const catEmbed = new MessageEmbed()
           .setColor(config.color)
           .setTitle("Here's a cat!")
           .setImage(data.file)
