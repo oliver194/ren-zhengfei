@@ -1,10 +1,17 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 32767 });
 
+async function HttpRequest(method, url) {
+  const response = await fetch(url, { method });
+  return response;
+}
+
 var config = {
   version: "1.1.4-a1",
+  color: "584dff",
   prefix: process.env.PREFIX,
   animal_images_channel: process.env.ANIMAL_CHANNEL_ID,
+  request: HttpRequest,
 };
 
 client.on("ready", () => {
@@ -17,7 +24,7 @@ client.on("ready", () => {
 
 client.on("messageCreate", (msg) => {
   if (msg.author.bot) return;
-  if (message.channel.type === "dm") return;
+  if (msg.channel.type === "dm") return;
   if (msg.content.indexOf(config.prefix) !== 0) return;
   const args = msg.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
