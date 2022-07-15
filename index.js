@@ -11,7 +11,6 @@ var package_config = require("./package.json");
 
 var config = {
   version: package_config.version,
-  discordjs: package_config.discord.js,
   color: "584dff",
   prefix: "!",
   animal_images_channel: process.env.ANIMAL_CHANNEL_ID,
