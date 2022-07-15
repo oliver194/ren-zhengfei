@@ -1,9 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "fox",
-  description: "Command providing a random fox image",
-  execute(message, args, config) {
+  name: "dog",
+  description: "Command providing a random dog image",
+  execute(client, message, args, config) {
     if (message.channel.id !== config.animal_images_channel) {
       message
         .reply(`This command can only be used in <#${config.animal_images_channel}>`)
@@ -15,15 +15,15 @@ module.exports = {
         });
       return;
     }
-    config.request("GET", "https://randomfox.ca/floof").then((response) => {
+    config.request("GET", "https://dog.ceo/api/breeds/image/random").then((response) => {
       response.json().then((data) => {
-        const foxEmbed = new MessageEmbed()
+        const dogEmbed = new MessageEmbed()
           .setColor(config.color)
-          .setTitle("Here's a fox!")
-          .setImage(data.image)
+          .setTitle("Here's a dog!")
+          .setImage(data.message)
           .setTimestamp()
-          .setFooter({ text: "Powered by randomfox.ca" });
-        message.reply({ embeds: [foxEmbed] });
+          .setFooter({ text: "Powered by dog.ceo" });
+        message.reply({ embeds: [dogEmbed] });
       });
     });
   },

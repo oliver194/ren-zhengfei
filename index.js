@@ -1,16 +1,15 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 32767 });
+const fetch = import("node-fetch");
 
 async function HttpRequest(method, url) {
-  const { default: fetch } = await import('node-fetch');
-  const response = await fetch(url, { method });
-  return response;
-}
+  return await (await fetch).default(url, { method: method });
+};
 
-var package = require("./package.json");
+var package_config = require("./package.json");
 
 var config = {
-  version: package.version,
+  version: package_config.version,
   color: "584dff",
   prefix: "!",
   animal_images_channel: process.env.ANIMAL_CHANNEL_ID,
@@ -32,8 +31,18 @@ client.on("messageCreate", (msg) => {
   const args = msg.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   try {
-    let commandFile = require(`./commands/${command}.js`);
-    commandFile.execute(msg, args, config);
+    const fs = require("fs");
+    fs.readdir("./commands", (err, files) => {
+      if (err) console.error(err);
+      else {
+        files.forEach((file) => {
+          if (file.endsWith(".js") && file.split(".")[0] === command) {
+            const commandFile = require(`./commands/${file}`);
+            commandFile.execute(client, msg, args, config);
+          }
+        });
+      }
+    });
   } catch (err) {
     if (err.code === "MODULE_NOT_FOUND") {
       msg.reply("Invalid command!").then((message) => {

@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "duck",
   description: "Command providing a random duck image",
-  execute(message, args, config) {
+  execute(client, message, args, config) {
     if (message.channel.id !== config.animal_images_channel) {
       message
         .reply(`This command can only be used in <#${config.animal_images_channel}>`)

@@ -4,7 +4,7 @@ module.exports = {
   name: "about",
   description: "Command providing information about the bot",
 
-  execute(message, args, config) {
+  execute(client, message, args, config) {
     const BotInfoEmbed = new MessageEmbed()
       .setColor(config.color)
       .setTitle("About Ren Zhengfei")

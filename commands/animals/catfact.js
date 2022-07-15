@@ -1,9 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "dog",
-  description: "Command providing a random dog image",
-  execute(message, args, config) {
+  name: "catfact",
+  description: "Command providing a random cat fact",
+  execute(client, message, args, config) {
     if (message.channel.id !== config.animal_images_channel) {
       message
         .reply(`This command can only be used in <#${config.animal_images_channel}>`)
@@ -15,15 +15,15 @@ module.exports = {
         });
       return;
     }
-    config.request("GET", "https://dog.ceo/api/breeds/image/random").then((response) => {
+    config.request("GET", "https://catfact.ninja/fact").then((response) => {
       response.json().then((data) => {
-        const dogEmbed = new MessageEmbed()
+        const catfactEmbed = new MessageEmbed()
           .setColor(config.color)
-          .setTitle("Here's a dog!")
-          .setImage(data.message)
+          .setTitle("Here's a random cat fact!")
+          .setDescription(data.fact)
           .setTimestamp()
-          .setFooter({ text: "Powered by dog.ceo" });
-        message.reply({ embeds: [dogEmbed] });
+          .setFooter({ text: "Powered by catfact.ninja" });
+        message.reply({ embeds: [catfactEmbed] });
       });
     });
   },
