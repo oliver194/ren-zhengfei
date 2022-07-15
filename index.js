@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 32767 });
 
 async function HttpRequest(method, url) {
+  const { default: fetch } = await import('node-fetch');
   const response = await fetch(url, { method });
   return response;
 }
