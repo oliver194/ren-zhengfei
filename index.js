@@ -20,6 +20,7 @@ var config = {
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setPresence({ activities: [{ name: 'with Huaweicord' }] });
 
   console.log(
     `\nVariables:\nprefix: ${config.prefix}\nanimal_images_channel: ${config.animal_images_channel}`
