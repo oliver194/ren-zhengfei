@@ -1,20 +1,42 @@
-const { MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+
+const data = new SlashCommandBuilder()
+  .setName("about")
+  .setDescription("Gives information about the bot!");
+
+async function execute(client, interaction, subinteraction, config) {
+  if (interaction.isButton()) {
+    if (interaction.user.id !== subinteraction.user.id) {
+      return;
+    }
+    if (interaction.customId === "delete") {
+      return await interaction.message.delete();
+    }
+  }
+  const row = new MessageActionRow();
+  row.addComponents(
+    new MessageButton()
+      .setCustomId("delete")
+      .setLabel("Delete")
+      .setStyle(4)
+      .setEmoji("🗑️")
+  );
+  var embed = new MessageEmbed()
+    .setColor(config.color)
+    .setTitle(`About ${client.user.username}`)
+    .setDescription("This bot is a custom bot for the Huaweicord server.")
+    .addFields(
+          { name: "Source", value: "[GitHub](https://github.com/oliver194/ren-zhengfei)", inline: true },
+          { name: "Node.JS Version", value: `[Node JS ${process.version}](https://nodejs.org/dist/${process.version})`, inline: true },
+          { name: "Contributors", value: "[oliver193](https://github.com/oliver194)\n\[TriDiscord](https://github.com/TriDiscord)\n\[ValerieOSS](https://github.com/ValerieOSS)", inline: true}
+    )
+    .setTimestamp()
+    .setFooter({ text: `Version: ${config.version}` });
+  await interaction.reply({ embeds: [embed], components: [row] });
+}
 
 module.exports = {
-  name: "about",
-  description: "Command providing information about the bot",
-
-  execute(message, args, config) {
-    const BotInfoEmbed = new MessageEmbed()
-      .setColor(config.color)
-      .setTitle("About Ren Zhengfei")
-      .setDescription("This bot was made by ValerieOSS, oliver193 and TriDiscord.")
-      .addFields(
-          { name: "Source", value: "[GitHub](https://github.com/oliver194/ren-zhengfei)", inline: true },
-          { name: "Node.JS Version", value: `${config.nodejs}`, inline: true }
-      )
-      .setTimestamp()
-      .setFooter({ text: "Version " + config.version });
-    message.reply({ embeds: [BotInfoEmbed] });
-  },
+  data,
+  execute,
 };
