@@ -1,49 +1,65 @@
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
+const fs = require("node:fs");
+const fetch = import("node-fetch");
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 32767 });
 
 async function HttpRequest(method, url) {
-  const { default: fetch } = await import('node-fetch');
-  const response = await fetch(url, { method });
-  return response;
-};
+  return await (await fetch).default(url, { method: method });
+}
 
 var package_config = require("./package.json");
 
 var config = {
-  nodejs: process.version,
   version: package_config.version,
   color: "584dff",
-  prefix: "!",
+  prefix: process.env.PREFIX,
   animal_images_channel: process.env.ANIMAL_CHANNEL_ID,
+  client_id: process.env.CLIENT_ID,
+  guild_id: process.env.GUILD_ID,
   request: HttpRequest,
 };
 
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setPresence({ activities: [{ name: 'with Huaweicord' }] });
+const commands = [];
+const commandFiles = fs
+  .readdirSync("./commands")
+  .filter((file) => file.endsWith(".js"));
 
-  console.log(
-    `\nVariables:\nprefix: ${config.prefix}\nanimal_images_channel: ${config.animal_images_channel}`
-  );
-});
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  commands.push(command.data.toJSON());
+}
 
-client.on("messageCreate", (msg) => {
-  if (msg.author.bot) return;
-  if (msg.channel.type === "dm") return;
-  if (msg.content.indexOf(config.prefix) !== 0) return;
-  const args = msg.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_TOKEN);
+
+(async () => {
   try {
-    let commandFile = require(`./commands/${command}.js`);
-    commandFile.execute(msg, args, config);
-  } catch (err) {
-    if (err.code === "MODULE_NOT_FOUND") {
-      msg.reply("Invalid command!").then((message) => {
-        setTimeout(() => {
-          msg.delete();
-          message.delete();
-        }, 5000);
-      });
+    console.log("Started refreshing application (/) commands.");
+
+    await rest.put(
+      Routes.applicationGuildCommands(config.client_id, config.guild_id),
+      { body: commands }
+    );
+
+    console.log("Successfully reloaded application (/) commands.");
+  } catch (error) {
+    console.error(error);
+  }
+})();
+
+client.on("interactionCreate", async (interaction) => {
+  for (const file of commandFiles) {
+    const file_name = file.split("/").at(-1);
+    if (!interaction.isCommand()) {
+      var subinteraction = interaction.message.interaction;
+      interaction.commandName = subinteraction.commandName;
+    } else {
+      var subinteraction = interaction;
+    }
+    if (interaction.commandName === file_name.split(".").at(0)) {
+      const command = require(`./commands/${file}`);
+      await command.execute(client, interaction, subinteraction, config);
     }
   }
 });
