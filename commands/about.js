@@ -22,7 +22,7 @@ async function execute(client, interaction, subinteraction, config) {
       .setStyle(4)
       .setEmoji("🗑️")
   );
-  var embed = new MessageEmbed()
+  var aboutEmbed = new MessageEmbed()
     .setColor(config.color)
     .setTitle(`About ${client.user.username}`)
     .setDescription("This bot is a custom bot for the Huaweicord server.")
@@ -33,7 +33,7 @@ async function execute(client, interaction, subinteraction, config) {
     )
     .setTimestamp()
     .setFooter({ text: `Version: ${config.version}` });
-  await interaction.reply({ embeds: [embed], components: [row] });
+  await interaction.reply({ embeds: [aboutEmbed], components: [row] });
 }
 
 module.exports = {
