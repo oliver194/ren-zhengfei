@@ -28,7 +28,7 @@ async function execute(client, interaction, subinteraction, config) {
     .setDescription("This bot is a custom bot for the Huaweicord server.")
     .addFields(
           { name: "Source", value: "[GitHub](https://github.com/oliver194/ren-zhengfei)", inline: true },
-          { name: "Node.JS Version", value: `[Node JS ${process.version}](https://nodejs.org/dist/${process.version})`, inline: true },
+          { name: "Node.JS Version", value: `[Node.JS ${process.version}](https://nodejs.org/dist/${process.version})`, inline: true },
           { name: "Contributors", value: "[oliver193](https://github.com/oliver194)\n\[TriDiscord](https://github.com/TriDiscord)\n\[ValerieOSS](https://github.com/ValerieOSS)", inline: true}
     )
     .setTimestamp()
