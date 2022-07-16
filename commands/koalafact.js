@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 
 const data = new SlashCommandBuilder()
-  .setName("kfact")
+  .setName("koalafact")
   .setDescription("Sends a random koala fact!");
 
 async function execute(client, interaction, subinteraction, config) {
