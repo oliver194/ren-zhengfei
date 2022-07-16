@@ -10,6 +10,7 @@ async function HttpRequest(method, url) {
 var package_config = require("./package.json");
 
 var config = {
+  nodejs: process.version,
   version: package_config.version,
   color: "584dff",
   prefix: "!",
