@@ -5,7 +5,7 @@ async function HttpRequest(method, url) {
   const { default: fetch } = await import('node-fetch');
   const response = await fetch(url, { method });
   return response;
-}
+};
 
 var package_config = require("./package.json");
 
