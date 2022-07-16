@@ -25,13 +25,13 @@ async function execute(client, interaction, subinteraction, config) {
     var response = await config.request("GET", "https://aws.random.cat/meow");
     var response = await response.json();
     var cat_url = response.file;
-    var embed = new MessageEmbed()
+    var catEmbed = new MessageEmbed()
       .setColor(config.color)
       .setTitle("Here's a cat!")
       .setImage(cat_url)
       .setTimestamp()
       .setFooter({ text: "Powered by aws.random.cat" });
-    return { embeds: [embed], components: [row] };
+    return { embeds: [catEmbed], components: [row] };
   }
   if (interaction.isButton()) {
     if (interaction.user.id !== subinteraction.user.id) {
