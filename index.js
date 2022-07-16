@@ -33,6 +33,11 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_TOKEN);
 
+client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setPresence({ activities: [{ name: 'in Huaweicord' }] });
+});
+
 (async () => {
   try {
     console.log("Started refreshing application (/) commands.");
