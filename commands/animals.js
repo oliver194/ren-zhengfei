@@ -27,7 +27,7 @@ async function execute(client, interaction, subinteraction, config) {
     .setTitle("Animal commands")
     .setDescription(`See the list below for available commands.\n**THE COMMANDS LISTED HERE ARE ONLY USABLE IN <#${config.animal_images_channel}>**`)
       .addFields(
-          { name: "Image commands:", value: "```/cat - sends a cat image\n/fox - sends a fox image\n/dog - sends a dog image\n/lizard - sends a lizard image\n/duck - sends a duck image.\n/rpanda - sends a red panda image\n/kangaroo - sends a kangaroo image\n/koala - sends a koala image\n/raccoon - sends a raccoon image```", inline: true },
+          { name: "Image commands:", value: "```/cat - sends a cat image\n/fox - sends a fox image\n/dog - sends a dog image\n/lizard - sends a lizard image\n/duck - sends a duck image.\n/redpanda - sends a red panda image\n/kangaroo - sends a kangaroo image\n/koala - sends a koala image\n/raccoon - sends a raccoon image```", inline: true },
           { name: "Fact commands:", value: "```/catfact - sends a cat fact\n/dogfact - sends a dog fact\n/birdfact - sends a bird fact\n/pandafact - sends a panda fact\n/koalafact - sends a koala fact\n/raccoonfact - sends a raccoon fact```", inline: true }
       )
     .setTimestamp()
