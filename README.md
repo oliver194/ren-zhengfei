@@ -14,7 +14,13 @@
   - On Windows:
     - `set ANIMAL_CHANNEL_ID=<channelID>`
     - `set DISCORD_TOKEN=<token>`
+    - `set GUILD_ID=<guildID>`
+    - `set CLIENT_ID=<clientID>`
+    - `set PREFIX=!`
   - On Linux/MacOS:
     - `export ANIMAL_CHANNEL_ID=<channelID>`
     - `export DISCORD_TOKEN=<token>`
+    - `export GUILD_ID=<guildID>`
+    - `export CLIENT_ID=<clientID>`
+    - `export PREFIX=!`
 6. Run the bot - Do so by running `node .` in your terminal
