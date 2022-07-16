@@ -25,13 +25,13 @@ async function execute(client, interaction, subinteraction, config) {
     var response = await config.request("GET", "https://some-random-api.ml/facts/bird");
     var response = await response.json();
     var bfact_url = response.fact;
-    var embed = new MessageEmbed()
+    var bfactEmbed = new MessageEmbed()
       .setColor(config.color)
       .setTitle("Here's a random bird fact!")
       .setDescription(bfact_url)
       .setTimestamp()
       .setFooter({ text: "Powered by some-random-api.ml" });
-    return { embeds: [embed], components: [row] };
+    return { embeds: [bfactEmbed], components: [row] };
   }
   if (interaction.isButton()) {
     if (interaction.user.id !== subinteraction.user.id) {
