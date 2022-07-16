@@ -1,6 +1,6 @@
 {
   "name": "ren-zhengfei-bot",
-  "version": "1.2.0-b1-16.07",
+  "version": "2.0.0-b1-16.07",
   "description": "Ren Zhengfei Bot for Huaweicord",
   "main": "index.js",
   "scripts": {
@@ -19,9 +19,9 @@
   },
   "homepage": "https://github.com/oliver194/ren-zhengfei#readme",
   "dependencies": {
-    "discord.js": "latest",
-    "node-fetch": "latest",
     "@discordjs/rest": "latest",
-    "discord-api-types": "latest"
+    "discord-api-types": "latest",
+    "discord.js": "^13.8.1",
+    "node-fetch": "latest"
   }
 }
