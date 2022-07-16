@@ -3,7 +3,7 @@ const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 
 const data = new SlashCommandBuilder()
   .setName("cat")
-  .setDescription("Sends a random c.at picture!");
+  .setDescription("Sends a random cat picture!");
 
 async function execute(client, interaction, subinteraction, config) {
   async function get_cat_interaction() {
