@@ -3,6 +3,7 @@
 &nbsp;
 ## Setup instructions
 1. git clone the repo: `git clone https://github.com/oliver194/ren-zhengfei.git`
+#### Node.JS 16 or above is recommended.
 2. Install Node.JS from [here (Windows/MacOS)](https://nodejs.org/en/download/), or from your Linux package manager (pkg usually named `node`. Also install `npm`)
 3. Install required dependendies via `npm install`
 4. Set the required environment variables:
@@ -16,4 +17,4 @@
   - On Linux/MacOS:
     - `export ANIMAL_CHANNEL_ID=<channelID>`
     - `export DISCORD_TOKEN=<token>`
-5. Run the bot - Do so by running `node .` in your terminal
+6. Run the bot - Do so by running `node .` in your terminal
