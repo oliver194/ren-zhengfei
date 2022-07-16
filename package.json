@@ -1,6 +1,6 @@
 {
   "name": "ren-zhengfei-bot",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Ren Zhengfei Bot for Huaweicord",
   "main": "index.js",
   "scripts": {
