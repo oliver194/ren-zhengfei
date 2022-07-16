@@ -1,30 +1,59 @@
-const { MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 
-module.exports = {
-  name: "koala",
-  description: "Command providing a random koala image",
-  execute(message, args, config) {
-    if (message.channel.id !== config.animal_images_channel) {
-      message
-        .reply(`This command can only be used in <#${config.animal_images_channel}>`)
-        .then((msg) => {
-          setTimeout(() => {
-            msg.delete();
-            message.delete();
-          }, 5000);
-        });
+const data = new SlashCommandBuilder()
+  .setName("koala")
+  .setDescription("Sends a random koala picture!");
+
+async function execute(client, interaction, subinteraction, config) {
+  async function get_koala_interaction() {
+    const row = new MessageActionRow();
+    row.addComponents(
+      new MessageButton()
+        .setCustomId("newkoala")
+        .setLabel("I want another one!")
+        .setStyle(1)
+        .setEmoji("🐨")
+    );
+    row.addComponents(
+      new MessageButton()
+        .setCustomId("delete")
+        .setLabel("Delete")
+        .setStyle(4)
+        .setEmoji("🗑️")
+    );
+    var response = await config.request("GET", "https://some-random-api.ml/img/koala");
+    var response = await response.json();
+    var koala_url = response.link;
+    var koalaEmbed = new MessageEmbed()
+      .setColor(config.color)
+      .setTitle("Here's a koala!")
+      .setImage(koala_url)
+      .setTimestamp()
+      .setFooter({ text: "Powered by some-random-api.ml" });
+    return { embeds: [koalaEmbed], components: [row] };
+  }
+  if (interaction.isButton()) {
+    if (interaction.user.id !== subinteraction.user.id) {
       return;
     }
-    config.request("GET", "https://some-random-api.ml/img/koala").then((response) => {
-      response.json().then((data) => {
-        const koalaEmbed = new MessageEmbed()
-          .setColor(config.color)
-          .setTitle("Here's a koala!")
-          .setImage(data.link)
-          .setTimestamp()
-          .setFooter({ text: "Powered by some-random-api.ml" });
-        message.reply({ embeds: [koalaEmbed] });
-      });
-    });
-  },
+    if (interaction.customId === "delete") {
+      return await interaction.message.delete();
+    } else if (interaction.customId === "newkoala") {
+      await interaction.message.edit(await get_koala_interaction());
+      return await interaction.deferUpdate();
+    }
+  }
+    if (interaction.channel.id !== config.animal_images_channel) {
+        
+        await interaction.reply({ content: `This command can only be used in <#${config.animal_images_channel}>`, ephemeral: true });
+        
+      return;
+    }
+  await interaction.reply(await get_koala_interaction());
+}
+
+module.exports = {
+  data,
+  execute,
 };
