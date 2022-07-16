@@ -10,8 +10,8 @@ module.exports = {
       .setTitle("About Ren Zhengfei")
       .setDescription("This bot was made by ValerieOSS, oliver193 and TriDiscord.")
       .addFields(
-          { name: "Source", value: "[GitHub](https://github.com/oliver194/ren-zhengfei)", inline: true }
-      //    { name: "Made", value: "<t:1657407600:R>", inline: true },
+          { name: "Source", value: "[GitHub](https://github.com/oliver194/ren-zhengfei)", inline: true },
+          { name: "Node.JS Version", value: `${config.nodejs}`, inline: true }
       )
       .setTimestamp()
       .setFooter({ text: "Version " + config.version });
