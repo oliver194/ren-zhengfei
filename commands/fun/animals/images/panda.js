@@ -1,7 +1,4 @@
-const {
-  SlashCommandBuilder,
-  SlashCommandBooleanOption,
-} = require("@discordjs/builders");
+const { SlashCommandBuilder, SlashCommandBooleanOption } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 
 const data = new SlashCommandBuilder()
@@ -43,10 +40,7 @@ async function execute(client, interaction, subinteraction, config) {
         var title = "Here's a panda!";
       }
     }
-    var response = await config.request(
-      "GET",
-      url
-    );
+    var response = await config.request("GET", url);
     var response = await response.json();
     var redpanda_url = response.link;
     var redpandaEmbed = new MessageEmbed()
@@ -69,10 +63,7 @@ async function execute(client, interaction, subinteraction, config) {
     }
   }
   if (interaction.channel.id !== config.animal_images_channel) {
-    await interaction.reply({
-      content: `This command can only be used in <#${config.animal_images_channel}>`,
-      ephemeral: true,
-    });
+    await interaction.reply({ content: `This command can only be used in <#${config.animal_images_channel}>`, ephemeral: true });
 
     return;
   }
