@@ -29,10 +29,10 @@ async function execute(client, interaction, subinteraction, config) {
     .addFields(
           { name: "Source", value: "[GitHub](https://github.com/oliver194/ren-zhengfei)", inline: true },
           { name: "Node.js Version", value: `[Node.js ${process.version}](https://nodejs.org/dist/${process.version})`, inline: true },
-          { name: "Contributors", value: "[oliver193](https://github.com/oliver194)\n\[TriDiscord](https://github.com/TriDiscord)\n\[ValerieOSS](https://github.com/ValerieOSS)", inline: true}
+          { name: "Contributors", value: "[oliver193](https://github.com/oliver194)\n\[mfn003](https://github.com/mfn003)\n\[ValerieOSS](https://github.com/ValerieOSS)", inline: true}
     )
     .setTimestamp()
-    .setFooter({ text: `Version: ${config.version}` });
+    .setFooter({ text: `Version: ${config.version}`});
   await interaction.reply({ embeds: [aboutEmbed], components: [row] });
 }
 
