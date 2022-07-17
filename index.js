@@ -45,12 +45,7 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
-
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setPresence({ activities: [{ name: 'in Huaweicord' }] });
-});
+const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_TOKEN);
 
 (async () => {
   try {
@@ -69,7 +64,7 @@ client.on("ready", () => {
 
 client.on("interactionCreate", async (interaction) => {
   for (const file of commandFiles) {
-    const file_name = file.split("/").at(-1);
+    const file_name = path.normalize(file).split('\\').pop().split('/').pop();
     if (!interaction.isCommand()) {
       var subinteraction = interaction.message.interaction;
       interaction.commandName = subinteraction.commandName;
