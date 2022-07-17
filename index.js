@@ -11,8 +11,10 @@ async function HttpRequest(method, url) {
 }
 
 var package_config = require("./package.json");
+var discordjs_config = require("./node_modules/discord.js/package.json")
 
 var config = {
+  discordjs: discordjs_config.version,
   version: package_config.version,
   color: "584dff",
   prefix: process.env.PREFIX,
