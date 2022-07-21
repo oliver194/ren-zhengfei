@@ -72,7 +72,7 @@ client.on("ready", () => {
 client.on("interactionCreate", async (interaction) => {
   for (const file of commandFiles) {
     const file_name = path.normalize(file).split('\\').pop().split('/').pop();
-    if (!interaction.isCommand()) {
+    if (!interaction.isChatInputCommand()) {
       var subinteraction = interaction.message.interaction;
       interaction.commandName = subinteraction.commandName;
     } else {
