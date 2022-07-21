@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 
 const data = new SlashCommandBuilder()
   .setName("about")
@@ -14,15 +14,15 @@ async function execute(client, interaction, subinteraction, config) {
       return await interaction.message.delete();
     }
   }
-  const row = new MessageActionRow();
+  const row = new ActionRowBuilder();
   row.addComponents(
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId("delete")
       .setLabel("Delete")
       .setStyle(4)
       .setEmoji("🗑️")
   );
-  var aboutEmbed = new MessageEmbed()
+  var aboutEmbed = new EmbedBuilder()
     .setColor(config.color)
     .setTitle(`About ${client.user.username}`)
     .setDescription("This bot is a custom bot for the Huaweicord server.")
@@ -32,7 +32,7 @@ async function execute(client, interaction, subinteraction, config) {
           { name: "Contributors", value: "[oliver193](https://github.com/oliver194)\n\[mfn003](https://github.com/mfn003)\n\[ValerieOSS](https://github.com/ValerieOSS)", inline: true}
     )
     .setTimestamp()
-    .setFooter({ text: `Version: ${config.version}`});
+    .setFooter({ text: `Version: ${config.version}` });
   await interaction.reply({ embeds: [aboutEmbed], components: [row] });
 }
 
