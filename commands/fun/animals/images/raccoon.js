@@ -1,21 +1,21 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 
 const data = new SlashCommandBuilder()
   .setName("raccoon")
   .setDescription("Sends a random raccoon picture!");
 async function execute(client, interaction, subinteraction, config) {
   async function get_raccoon_interaction() {
-    const row = new MessageActionRow();
+    const row = new ActionRowBuilder();
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("newraccoon")
         .setLabel("I want another one!")
         .setStyle(1)
         .setEmoji("🦝")
     );
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("delete")
         .setLabel("Delete")
         .setStyle(4)
@@ -24,7 +24,7 @@ async function execute(client, interaction, subinteraction, config) {
     var response = await config.request("GET", "https://some-random-api.ml/img/raccoon");
     var response = await response.json();
     var raccoon_url = response.link;
-    var raccoonEmbed = new MessageEmbed()
+    var raccoonEmbed = new EmbedBuilder()
       .setColor(config.color)
       .setTitle("Here's a raccoon!")
       .setImage(raccoon_url)
