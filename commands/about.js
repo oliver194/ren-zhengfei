@@ -28,7 +28,7 @@ async function execute(client, interaction, subinteraction, config) {
     .setDescription("This bot is a custom bot for the Huaweicord server.")
     .addFields(
           { name: "Source", value: "[GitHub](https://github.com/oliver194/ren-zhengfei)", inline: true },
-          { name: "Framework", value: `[Node.js ${process.version}](https://nodejs.org/dist/${process.version})\n\[Discord.js ${config.discordjs}](https://www.npmjs.com/package/discord.js)`, inline: true },
+          { name: "Framework", value: `[Node.js ${process.version}](https://nodejs.org/dist/${process.version})\n\[Discord.js ${config.discordjs}](https://www.npmjs.com/package/discord.js/v/${config.discordjs})`, inline: true },
           { name: "Contributors", value: "[oliver193](https://github.com/oliver194)\n\[mfn003](https://github.com/mfn003)\n\[ValerieOSS](https://github.com/ValerieOSS)", inline: true}
     )
     .setTimestamp()
