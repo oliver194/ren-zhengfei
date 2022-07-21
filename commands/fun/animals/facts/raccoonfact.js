@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 
 const data = new SlashCommandBuilder()
   .setName("raccoonfact")
@@ -7,16 +7,16 @@ const data = new SlashCommandBuilder()
 
 async function execute(client, interaction, subinteraction, config) {
   async function get_rfact_interaction() {
-    const row = new MessageActionRow();
+    const row = new ActionRowBuilder();
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("newrfact")
         .setLabel("I want another one!")
         .setStyle(1)
         .setEmoji("🦝")
     );
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("delete")
         .setLabel("Delete")
         .setStyle(4)
@@ -25,7 +25,7 @@ async function execute(client, interaction, subinteraction, config) {
     var response = await config.request("GET", "https://some-random-api.ml/facts/raccoon");
     var response = await response.json();
     var rfact_url = response.fact;
-    var rfactEmbed = new MessageEmbed()
+    var rfactEmbed = new EmbedBuilder()
       .setColor(config.color)
       .setTitle("Here's a random raccoon fact!")
       .setDescription(rfact_url)
