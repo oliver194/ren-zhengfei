@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 
 const data = new SlashCommandBuilder()
   .setName("cat")
@@ -7,16 +7,16 @@ const data = new SlashCommandBuilder()
 
 async function execute(client, interaction, subinteraction, config) {
   async function get_cat_interaction() {
-    const row = new MessageActionRow();
+    const row = new ActionRowBuilder();
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("newcat")
         .setLabel("I want another one!")
         .setStyle(1)
         .setEmoji("😻")
     );
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("delete")
         .setLabel("Delete")
         .setStyle(4)
@@ -25,7 +25,7 @@ async function execute(client, interaction, subinteraction, config) {
     var response = await config.request("GET", "https://aws.random.cat/meow");
     var response = await response.json();
     var cat_url = response.file;
-    var catEmbed = new MessageEmbed()
+    var catEmbed = new EmbedBuilder()
       .setColor(config.color)
       .setTitle("Here's a cat!")
       .setImage(cat_url)
