@@ -4,6 +4,7 @@ const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const data = new SlashCommandBuilder()
   .setName("raccoon")
   .setDescription("Sends a random raccoon picture!");
+
 async function execute(client, interaction, subinteraction, config) {
   async function get_raccoon_interaction() {
     const row = new ActionRowBuilder();
