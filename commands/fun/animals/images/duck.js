@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 
 const data = new SlashCommandBuilder()
   .setName("duck")
@@ -7,16 +7,16 @@ const data = new SlashCommandBuilder()
 
 async function execute(client, interaction, subinteraction, config) {
   async function get_duck_interaction() {
-    const row = new MessageActionRow();
+    const row = new ActionRowBuilder();
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("newduck")
         .setLabel("I want another one!")
         .setStyle(1)
         .setEmoji("🦆")
     );
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("delete")
         .setLabel("Delete")
         .setStyle(4)
@@ -25,7 +25,7 @@ async function execute(client, interaction, subinteraction, config) {
     var response = await config.request("GET", "https://random-d.uk/api/random");
     var response = await response.json();
     var duck_url = response.url;
-    var duckEmbed = new MessageEmbed()
+    var duckEmbed = new EmbedBuilder()
       .setColor(config.color)
       .setTitle("Here's a duck!")
       .setImage(duck_url)
