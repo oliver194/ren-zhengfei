@@ -1,5 +1,5 @@
-const { SlashCommandBuilder, SlashCommandBooleanOption } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 
 const data = new SlashCommandBuilder()
   .setName("panda")
@@ -8,16 +8,16 @@ const data = new SlashCommandBuilder()
 
 async function execute(client, interaction, subinteraction, config) {
   async function get_redpanda_interaction() {
-    const row = new MessageActionRow();
+    const row = new ActionRowBuilder();
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("newpanda")
         .setLabel("I want another one!")
         .setStyle(1)
         .setEmoji("🐼")
     );
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setCustomId("delete")
         .setLabel("Delete")
         .setStyle(4)
@@ -43,7 +43,7 @@ async function execute(client, interaction, subinteraction, config) {
     var response = await config.request("GET", url);
     var response = await response.json();
     var redpanda_url = response.link;
-    var redpandaEmbed = new MessageEmbed()
+    var redpandaEmbed = new EmbedBuilder()
       .setColor(config.color)
       .setTitle(title)
       .setImage(redpanda_url)
